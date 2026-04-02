@@ -1,0 +1,13 @@
+# DragonFlow 依赖（全免费）
+akshare>=1.12.0
+sqlalchemy>=2.0
+apscheduler>=3.10
+fastapi>=0.100
+uvicorn[standard]
+websockets
+loguru
+rich
+chinese-calendar
+pytz
+jinja2
+pandas

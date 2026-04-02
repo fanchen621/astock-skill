@@ -1,0 +1,58 @@
+name: dragonflow
+display_name: "DragonFlow v2 龙空龙智能量化系统"
+description: |
+  全自动A股量化交易系统，融合文少情绪流+龙空龙战法。
+  v2新增：弹性多数据源(新浪/腾讯/东方财富/网易自动切换)、
+  舆情反指标(股吧/雪球/同花顺RSI)、系统自愈引擎、
+  24h知识爬虫+自动学习进化。
+  1万本金专属：4区间仓位、双龙破晓选股、-1.8%硬止损、
+  +5%/+8%阶梯止盈、3天清仓。
+version: "2.0.0"
+author: "DragonFlow"
+runtime: python
+entry: skill.py
+
+commands:
+  - name: dragonflow
+    description: "启动DragonFlow系统"
+  - name: dragonflow_status
+    description: "查看系统状态"
+  - name: dragonflow_dashboard
+    description: "打开可视化Dashboard"
+  - name: dragonflow_report
+    description: "手动触发报告（morning/midday/closing）"
+  - name: dragonflow_backtest
+    description: "运行回测"
+
+schedule:
+  - cron: "50 8 * * 1-5"
+    command: morning_briefing
+  - cron: "35 11 * * 1-5"
+    command: midday_analysis
+  - cron: "35 15 * * 1-5"
+    command: closing_report
+  - cron: "17 */2 * * *"
+    command: knowledge_crawl
+  - cron: "0 2 * * *"
+    command: nightly_learning
+  - cron: "0 */6 * * *"
+    command: health_check
+
+webview:
+  enabled: true
+  path: /
+  title: "DragonFlow Dashboard"
+
+dependencies:
+  - akshare>=1.12.0
+  - sqlalchemy>=2.0
+  - apscheduler>=3.10
+  - fastapi>=0.100
+  - uvicorn[standard]
+  - websockets
+  - loguru
+  - rich
+  - chinese-calendar
+  - pytz
+  - jinja2
+  - pandas

@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+*.log
+data/logs/
+data/*.db
+data/proxy_scores.json
+.DS_Store
